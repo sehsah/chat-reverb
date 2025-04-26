@@ -183,10 +183,15 @@
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
         document.addEventListener('DOMContentLoaded', function() {
-                window.Echo.channel('general').listen('MessageSent', (e) => {
-                    console.log(e);
-                    appendMessage(e.message);
-                });
+            window.Echo.join('general').listenForWhisper('typing', (e) => {
+                showTypingIndicator(e.user);
+            }).listenForWhisper('stopTyping', (e) => {
+                hideTypingIndicator();
+            });
+            window.Echo.channel('general').listen('MessageSent', (e) => {
+                console.log(e);
+                appendMessage(e.message);
+            });
         });
         function appendMessage(message) {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -194,7 +199,24 @@
             const messageHtml = ``;
             messagesContainer.insertAdjacentHTML('beforeend', messageHtml);
         }
+        function showTypingIndicator(user) {
+            let typingDiv = document.getElementById('typing-indicator');
+            if (!typingDiv) {
+                typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.classList.add('typing-indicator');
+                document.querySelector('.chat-messages').appendChild(typingDiv);
+            }
+            typingDiv.innerText = `${user.name} is typing...`;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
 
+        function hideTypingIndicator() {
+            const typingDiv = document.getElementById('typing-indicator');
+            if (typingDiv) {
+                typingDiv.remove();
+            }
+        }
         // Enable Bootstrap tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

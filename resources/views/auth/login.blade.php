@@ -1,85 +1,48 @@
 @extends('layout.master')
 
 @section('content')
-<div class="flex items-center justify-center min-h-screen bg-[#FDFDFC] dark:bg-[#0a0a0a]">
-    <div class="w-full max-w-md p-6">
-        <h2 class="mb-6 text-2xl font-semibold text-center text-[#1b1b18] dark:text-[#EDEDEC]">
-            {{ __('Log in to your account') }}
-        </h2>
-
-        <form method="POST" action="{{ route('login') }}" class="space-y-4">
-            @csrf
-
-            <div>
-                <label for="name" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
-                    {{ __('Username') }}
-                </label>
-                <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    value="{{ old('name') }}"
-                    required
-                    autofocus
-                    class="w-full px-5 py-1.5 mt-1 border rounded-sm text-[#1b1b18] border-[#19140035] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:bg-[#0a0a0a]"
-                />
-                @error('name')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
-                <label for="password" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
-                    {{ __('Password') }}
-                </label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    required
-                    class="w-full px-5 py-1.5 mt-1 border rounded-sm text-[#1b1b18] border-[#19140035] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:bg-[#0a0a0a]"
-                />
-                @error('password')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <input
-                        id="remember"
-                        type="checkbox"
-                        name="remember"
-                        class="border-[#19140035] rounded"
-                    />
-                    <label for="remember" class="ml-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
-                        {{ __('Remember me') }}
-                    </label>
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-400 to-purple-100 p-4">
+        <div class="w-full max-w-md">
+            <div class="bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg space-y-6">
+                <div class="flex flex-col space-y-2 text-center">
+                    <h1 class="text-2xl font-semibold tracking-tight">Welcome back</h1>
+                    <p class="text-sm text-muted-foreground">Enter your Name to sign in to your account</p>
                 </div>
-
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:underline">
-                        {{ __('Forgot password?') }}
-                    </a>
-                @endif
+                <form method="POST" action="{{ route('login') }}" class="space-y-4">
+                    @csrf
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none" for="Name">Name</label>
+                        <input 
+                            name="name"
+                            value="{{ old('name') }}"
+                            class="flex h-10 w-full rounded-md border px-3 py-2 text-base placeholder:text-muted-foreground " 
+                            required>
+                            @error('name')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror                            
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none" for="password">Password</label>
+                        <div class="relative">
+                            <input type="password" name="password" class="flex h-10 w-full rounded-md border px-3 py-2 text-base placeholder:text-muted-foreground " id="password" placeholder="Enter your password" required>
+                            @error('password')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <button class="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" type="submit">Sign in</button>
+                </form>
+                <div class="text-center text-sm text-gray-500 mt-4">
+                    @if (Route::has('register'))
+                        <p class="mt-4 text-sm text-center">
+                            {{ __("Don't have an account?") }}
+                            <a href="{{ route('register') }}" class="hover:underline">
+                                {{ __('Register') }}
+                            </a>
+                        </p>
+                    @endif                    
+                </div>
             </div>
-
-            <button
-                type="submit"
-                class="w-full px-5 py-1.5 text-white bg-[#1b1b18] border border-[#1b1b18] rounded-sm hover:bg-black dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white"
-            >
-                {{ __('Log in') }}
-            </button>
-
-            @if (Route::has('register'))
-                <p class="mt-4 text-sm text-center text-[#1b1b18] dark:text-[#EDEDEC]">
-                    {{ __("Don't have an account?") }}
-                    <a href="{{ route('register') }}" class="hover:underline">
-                        {{ __('Register') }}
-                    </a>
-                </p>
-            @endif
-        </form>
+        </div>
     </div>
-</div>
 @endsection

@@ -1,15 +1,15 @@
 @extends('layout.master')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-400 to-purple-100 p-4">
     <div class="max-w-md w-full space-y-8 bg-white dark:bg-[#1C1C1A] p-6 rounded-lg shadow-md">
         <div>
-            <h2 class="text-center text-3xl font-bold text-[#1b1b18] dark:text-[#EDEDEC]">
+            <h2 class="text-2xl font-semibold tracking-tight">
                 {{ __('Create an Account') }}
             </h2>
-            <p class="mt-2 text-center text-sm text-gray-600 dark:text-[#EDEDEC]">
+            <p class="text-sm text-muted-foreground ">
                 {{ __('Already have an account?') }}
-                <a href="{{ route('login') }}" class="font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:underline">
+                <a href="{{ route('login') }}" class="font-medium text-[#1b1b18]  hover:underline">
                     {{ __('Sign in') }}
                 </a>
             </p>
@@ -19,8 +19,8 @@
             @csrf
 
             <!-- Full Name -->
-            <div>
-                <label for="name" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
+            <div class="space-y-2">
+                <label for="name" class="text-sm font-medium leading-none">
                     {{ __('Full Name') }}
                 </label>
                 <input
@@ -30,7 +30,7 @@
                     value="{{ old('name') }}"
                     required
                     autofocus
-                    class="w-full px-5 py-2 mt-1 border rounded-sm text-[#1b1b18] border-[#19140035] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:bg-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]"
+                    class="flex h-10 w-full rounded-md border px-3 py-2 text-base placeholder:text-muted-foreground " 
                     placeholder="{{ __('Enter your full name') }}"
                 />
                 @error('name')
@@ -39,8 +39,8 @@
             </div>
 
             <!-- Password -->
-            <div>
-                <label for="password" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
+            <div class="space-y-2">
+                <label for="password" class="text-sm font-medium leading-none">
                     {{ __('Password') }}
                 </label>
                 <input
@@ -48,7 +48,7 @@
                     type="password"
                     name="password"
                     required
-                    class="w-full px-5 py-2 mt-1 border rounded-sm text-[#1b1b18] border-[#19140035] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:bg-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]"
+                    class="flex h-10 w-full rounded-md border px-3 py-2 text-base placeholder:text-muted-foreground " 
                     placeholder="{{ __('Create a password') }}"
                 />
                 @error('password')
@@ -58,7 +58,7 @@
 
             <!-- Confirm Password -->
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
+                <label for="password_confirmation" class="text-sm font-medium leading-none">
                     {{ __('Confirm Password') }}
                 </label>
                 <input
@@ -66,7 +66,7 @@
                     type="password"
                     name="password_confirmation"
                     required
-                    class="w-full px-5 py-2 mt-1 border rounded-sm text-[#1b1b18] border-[#19140035] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:bg-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]"
+                    class="flex h-10 w-full rounded-md border px-3 py-2 text-base placeholder:text-muted-foreground " 
                     placeholder="{{ __('Confirm your password') }}"
                 />
             </div>
@@ -74,7 +74,7 @@
 
             <button
                 type="submit"
-                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-sm text-sm font-medium text-white bg-[#1b1b18] hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b1b18] dark:bg-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white"
+                class="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
             >
                 {{ __('Create Account') }}
             </button>
