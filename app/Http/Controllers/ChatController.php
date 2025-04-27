@@ -49,7 +49,6 @@ class ChatController extends Controller
     public function store(Request $request)
     {
         $message = Message::create([
-            'conversation_id' => $request->conversation_id,
             'user_id' => auth()->id(),
             'message' => $request->message,
         ]);
